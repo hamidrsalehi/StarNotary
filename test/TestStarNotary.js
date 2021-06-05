@@ -109,3 +109,28 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
 
     assert.equal(star1[1]+star2[1], star2new[1]+star1new[1]);
 });
+
+// User transfer star
+it('lets user1 transfer their star', async() => {
+    let instance = await StarNotary.deployed();
+    let user1 = accounts[0];
+    let user2 = accounts[1];
+    console.log("user1", user1);
+    console.log("user2", user2);
+
+    let tokenId1 = 105;
+ 
+    await instance.createStar('Polaris', tokenId1, {from: user1})
+
+    let star1 = await instance.lookUptokenIdToStarInfo(tokenId1, {from: accounts[2]});
+    console.log("star 1 before transfer", star1);
+
+    await instance.transferStars(user2, tokenId1, {from: user1});
+
+    let star1new = await instance.lookUptokenIdToStarInfo(tokenId1, {from: accounts[2]});
+    console.log("star 1 after transfer", star1new);
+
+    let starOwner = star1new[1];
+
+    assert.equal(user2,starOwner);
+});

@@ -97,4 +97,12 @@ contract StarNotary is ERC721 {
         _transfer(owner_user1, owner_user2, _tokenId_user1);
         _transfer(owner_user2, owner_user1, _tokenId_user2);
     }
+
+    function transferStars(address _to, uint256 _tokenId) public {
+        require(
+            ownerOf(_tokenId) == msg.sender,
+            "You can't transfer the Star you don't owned"
+        );
+        transferFrom(msg.sender, _to, _tokenId);
+    }
 }
