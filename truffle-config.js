@@ -1,6 +1,6 @@
 const path = require("path");
 var HDWalletProvider = require("truffle-hdwallet-provider");
-var mnemonic = "broom light family give heart auto height mistake setup digital fossil illness";
+var mnemonic = "";
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
